@@ -7,6 +7,7 @@ from django.views.generic import CreateView, DeleteView, UpdateView
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.contrib.auth import get_user_model
+from django.core.paginator import Paginator
 # Create your views here.
 
 
@@ -91,22 +92,28 @@ def homefunc(request):
 # タイムラインで筋トレデータを表示
 @login_required
 def timeline_workoutfunc(request):
-    workout_data = WorkoutModel.objects.order_by('-date').all()
+    workout = WorkoutModel.objects.order_by('-date').all()
+    paginator = Paginator(workout, 5)
+    page = request.GET.get('page')
+    workout_data = paginator.get_page(page)
     return render(request, 'timeline_workout.html', {'workout_data': workout_data})
 
 
 # タイムラインで食事データを表示
 @login_required
 def timeline_dietfunc(request):
-    diet_data = DietModel.objects.order_by('-date').all()
+    diet = DietModel.objects.order_by('-date').all()
+    paginator = Paginator(diet, 5)
+    page = request.GET.get('page')
+    diet_data = paginator.get_page(page)
     return render(request, 'timeline_diet.html', {'diet_data': diet_data})
 
 
 # タイムラインで身体データを表示
 @login_required
 def timeline_bodyfunc(request):
-    body_data = BodyModel.objects.order_by('-date').all()
-    for data in body_data:
+    body = BodyModel.objects.order_by('-date').all()
+    for data in body:
         user = get_user_model()
         user_data = user.objects.get(username=data.author)
         # ハリスベネティクト方程式で基礎代謝を算出
@@ -117,6 +124,9 @@ def timeline_bodyfunc(request):
         data.cutting_calorie = data.maintenance_calorie - 500
         data.increasing_calorie = data.maintenance_calorie + 250
         data.save()
+    paginator = Paginator(body, 5)
+    page = request.GET.get('page')
+    body_data = paginator.get_page(page)
     return render(request, 'timeline_body.html', {'body_data': body_data})
 
 

@@ -11,9 +11,8 @@
 
 {% block header %}
 <h1>Muscle App</h1>
-    <a href="{% url 'timeline_workout' %}" class="btn btn-secondary">タイムラインへ</a>
-    <a href="{% url 'change_date' %}" class="btn btn-secondary">日付を変更する</a>
-    <hr>
+    <a href="{% url 'timeline_workout' %}" class="btn btn-secondary btn-sm">タイムラインへ</a>
+    <a href="{% url 'change_date' %}" class="btn btn-secondary btn-sm">日付を変更する</a>
 {% endblock header %}
 
 {% block content %}
@@ -33,7 +32,7 @@
         <p>回数:{{ item.reps }}</p>
         <p>セット数:{{ item.set }}</p>
         <p><a href="{% url 'workout_update' item.pk %}" class="btn btn-secondary">編集</a>　
-            <a href="{% url 'workout_delete' item.pk %}" class="btn btn-secondary">削除</a></p>
+            <a href="{% url 'workout_delete' item.pk %}" class="btn btn-secondary">削除</a>
     </div>
     </div>
     {% endfor %}

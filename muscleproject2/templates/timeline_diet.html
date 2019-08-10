@@ -11,11 +11,10 @@
 
 {% block header %}
 <h1>Muscle App</h1>
-    <a href="{% url 'home' %}" class="btn btn-secondary">ホーム画面へ</a>
-    <a href="{% url 'timeline_workout' %}" class="btn btn-secondary">筋トレメニュー</a>
-    <a href="{% url 'timeline_diet' %}" class="btn btn-secondary disabled">食事管理</a>
-    <a href="{% url 'timeline_body' %}" class="btn btn-secondary">体重管理</a>
-<hr>
+    <a href="{% url 'home' %}" class="btn btn-secondary btn-sm">ホーム画面へ</a>
+    <a href="{% url 'timeline_workout' %}" class="btn btn-secondary btn-sm">筋トレメニュー</a>
+    <a href="{% url 'timeline_diet' %}" class="btn btn-secondary disabled btn-sm">食事管理</a>
+    <a href="{% url 'timeline_body' %}" class="btn btn-secondary btn-sm">体重管理</a>
 
 {% endblock header %}
 
@@ -38,3 +37,21 @@
 </div>
 {% endfor %}
 {% endblock content %}
+
+{% block paginator %}
+<span class="step-links">
+        {% if diet_data.has_previous %}
+            <a href="?page=1">&laquo; 最初のページ</a>・
+            <a href="?page={{ diet_data.previous_page_number }}">前へ</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ diet_data.number }} / {{ diet_data.paginator.num_pages }}.
+        </span>
+
+        {% if diet_data.has_next %}
+            <a href="?page={{ diet_data.next_page_number }}">次へ</a>・
+            <a href="?page={{ diet_data.paginator.num_pages }}">最後のページ &raquo;</a>
+        {% endif %}
+</span>
+{% endblock paginator %}
