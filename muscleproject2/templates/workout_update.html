@@ -1,0 +1,35 @@
+{% extends 'base_afterlogin.html' %}
+
+{% block customcss %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'workout_edit.css' %}">
+{% endblock customcss %}
+
+{% block title %}
+筋トレメニュー更新
+{% endblock title %}
+
+
+{% block header %}
+<h1>Muscle App</h1>
+    <a href="{% url 'home' %}" class="btn btn-secondary">ホーム画面へ</a>
+    <a href="{% url 'timeline_workout' %}" class="btn btn-secondary">タイムラインへ</a>
+    <hr>
+{% endblock header %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<div class="content">
+<form action="" method="POST">{% csrf_token %}
+<p>種目:<input type="text" name="name"></p>
+    <p>重量:<input type="number" name="weight" step="0.25">kg</p>
+    <p>回数:<input type="number" name="reps">回</p>
+    <p>セット数:<input type="number" name="set"></p>
+    <input type="submit" value="更新する">
+</form>
+</div>
+{% else %}
+<a href="{% url 'login' %}">ログイン</a>してください
+{% endif %}
+
+{% endblock content %}

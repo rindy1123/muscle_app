@@ -1,0 +1,86 @@
+{% extends 'base_afterlogin.html' %}
+
+{% block customcss %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'home_style.css' %}">
+{% endblock customcss %}
+
+{% block title %}
+ホーム画面
+{% endblock title %}
+
+{% block header %}
+<h1>Muscle App</h1>
+    <a href="{% url 'timeline_workout' %}" class="btn btn-secondary">タイムラインへ</a>
+    <a href="{% url 'change_date' %}" class="btn btn-secondary">日付を変更する</a>
+    <hr>
+{% endblock header %}
+
+{% block content %}
+<div class="space">
+</div>
+
+    <div class="menu">
+        <p>筋トレメニュー<a href="{% url 'workout_create' %}" class="btn btn-secondary">追加</a></p>
+    </div>
+    {% for item in workout_data %}
+    <div class="container">
+    <div class="info">
+        <p>投稿者:{{ item.author }}</p>
+        <p>日付:{{ item.date }}</p>
+        <p>種目:{{ item.name }}</p>
+        <p>重量:{{ item.weight }}kg</p>
+        <p>回数:{{ item.reps }}</p>
+        <p>セット数:{{ item.set }}</p>
+        <p><a href="{% url 'workout_update' item.pk %}" class="btn btn-secondary">編集</a>　
+            <a href="{% url 'workout_delete' item.pk %}" class="btn btn-secondary">削除</a></p>
+    </div>
+    </div>
+    {% endfor %}
+
+    <div class="menu">
+    <p>食事管理 <a href="{% url 'diet_create' %}" class="btn btn-secondary">追加</a></p>
+    </div>
+    {% for item in diet_data %}
+    <div class="container">
+    <div class="info">
+        <p>投稿者:{{ item.author }}</p>
+        <p>日付:{{ item.date }}</p>
+        <p>カロリー:{{ item.calorie }}kcal</p>
+        <p>食事名:{{ item.name }}</p>
+        <p>たんぱく質:{{ item.protein }}g</p>
+        <p>炭水化物:{{ item.carb }}g</p>
+        <p>脂質:{{ item.fat }}g</p>
+
+        <p><a href="{% url 'diet_update' item.pk %}" class="btn btn-secondary">編集</a>
+            <a href="{% url 'diet_delete' item.pk %}" class="btn btn-secondary">削除</a></p>
+    </div>
+    </div>
+    {% endfor %}
+
+    <div class="menu">
+        <p>体重管理<a href="{% url 'body_create' %}" class="btn btn-secondary">追加</a></p>
+    </div>
+    {% for item in body_data %}
+    <div class="container">
+    <div class="info">
+        <p>投稿者:{{ item.author }}</p>
+        <p>日付:{{ item.date }}</p>
+        <p>体重:{{ item.weight }}kg</p>
+        <p>体脂肪率:{{ item.percent_body_fat }}%</p>
+        <p>筋肉量:{{ item.muscle_mass }}kg</p>
+        <div class="calorie">
+    <h2>{{ item.author }}さんの摂取カロリー</h2>
+    <p>メンテナンスカロリー:{{ item.maintenance_calorie }}kcal</p>
+    <p>増量期カロリー（目安）:{{ item.increasing_calorie }}kcal</p>
+    <p>減量期カロリー（目安）:{{ item.cutting_calorie }}kcal</p>
+</div>
+
+        <p><a href="{% url 'body_update' item.pk %}" class="btn btn-secondary">編集</a>
+            <a href="{% url 'body_delete' item.pk %}" class="btn btn-secondary">削除</a></p>
+    </div>
+    </div>
+    {% endfor %}
+
+
+{% endblock content %}

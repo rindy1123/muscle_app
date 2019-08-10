@@ -1,0 +1,36 @@
+{% extends 'base_afterlogin.html' %}
+
+{% block customcss %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'diet_edit.css' %}">
+{% endblock customcss %}
+
+{% block title %}
+食事データ追加
+{% endblock title %}
+
+{% block header %}
+<h1>Muscle App</h1>
+    <a href="{% url 'home' %}" class="btn btn-secondary">ホーム画面へ</a>
+    <a href="{% url 'timeline_workout' %}" class="btn btn-secondary">タイムラインへ</a>
+    <hr>
+{% endblock header %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<div class="content">
+<form action="" method="POST">{% csrf_token %}
+<p>カロリー:<input type="number" name="calorie" step='0.1'>kcal</p>
+    <p>食事名:<input type="text" name="name"></p>
+    <p>タンパク質:<input type="number" name="protein" step='0.1'>g</p>
+    <p>炭水化物:<input type="number" name="carb" step='0.1'>g</p>
+    <p>脂質:<input type="number" name="fat" step='0.1'>g</p>
+    <input type="hidden" name="author" value="{{ user.username }}">
+    <input type="submit" value="追加する">
+</form>
+</div>
+{% else %}
+<a href="{% url 'login' %}">ログイン</a>してください
+{% endif %}
+
+{% endblock content %}

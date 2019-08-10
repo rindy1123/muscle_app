@@ -1,0 +1,29 @@
+{% extends 'base_afterlogin.html' %}
+
+{% block customcss %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'change_date.css' %}">
+{% endblock customcss %}
+
+{% block title %}
+日付変更
+{% endblock title %}
+
+{% block header %}
+<h1>Muscle App</h1>
+    <a href="{% url 'home' %}" class="btn btn-secondary">ホーム画面へ</a>
+    <a href="{% url 'timeline_workout' %}" class="btn btn-secondary">タイムラインへ</a>
+    <hr>
+{% endblock header %}
+
+{% block content %}
+<div class="content">
+    <h1 class="change_date">ホームの日付を変更</h1>
+<form action="{% url 'home' %}" method="POST">{% csrf_token %}
+    <label class="date">
+        <input type='date' name="date">
+    </label>
+    <input type="submit" value="変更する">
+</form>
+</div>
+{% endblock content %}

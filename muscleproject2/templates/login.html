@@ -1,0 +1,36 @@
+{% extends 'base_beforelogin.html' %}
+
+{% block customcss %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'login.css' %}">
+{% endblock customcss %}
+
+{% block title %}
+ログイン画面
+{% endblock title %}
+
+{% block header %}
+<h1>Muscle App</h1>
+{% endblock header %}
+
+
+{% block content %}
+<div class="content">
+  <form class="form-signin" method="POST" action="">{% csrf_token %}
+    {% if error %}
+    {{ error }}
+    {% endif %}
+    <p class="info">ユーザー名</p>
+  <label for="inputUsername" class="sr-only">ユーザー名</label>
+  <input type="text" id="inputUsername" class="form-control" name="username" required autofocus>
+  <p class="info">パスワード</p>
+  <label for="inputPassword" class="sr-only">パスワード</label>
+  <input type="password" id="inputPassword" class="form-control" name='password' required>
+        <p></p>
+        <p><button class="btn btn-lg btn-primary btn-block" type="submit">ログイン</button></p>
+        <p>登録がお済みでない方は<a href="{% url 'signup'%}">こちら</a></p>
+</div>
+
+  <p>&copy; 2017-2019</p>
+</form>
+{% endblock content %}

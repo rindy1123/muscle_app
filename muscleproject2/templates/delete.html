@@ -1,0 +1,29 @@
+{% extends 'base_afterlogin.html' %}
+
+{% block customcss %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'delete.css' %}">
+{% endblock customcss %}
+
+{% block title %}
+データ削除
+{% endblock title %}
+
+{% block header %}
+<h1>Muscle App</h1>
+    <a href="{% url 'home' %}" class="btn btn-secondary">ホーム画面へ</a>
+    <a href="{% url 'timeline_workout' %}" class="btn btn-secondary">タイムラインへ</a>
+    <hr>
+{% endblock header %}
+
+
+{% block content %}
+<div class="content">
+    <span class="badge badge-danger">注意</span>
+    <span class="confirmation">このデータを削除してもよろしいですか？</span>
+<form action="" method="POST">{% csrf_token %}
+    <input type="submit" value="はい" class="btn btn-secondary">
+    <a href="{% url 'home' %}" class="btn btn-secondary">いいえ</a>
+</form>
+</div>
+{% endblock content %}

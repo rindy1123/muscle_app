@@ -1,0 +1,42 @@
+{% extends 'base_afterlogin.html' %}
+
+{% block customcss %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'timeline.css' %}">
+{% endblock customcss %}
+
+{% block title %}
+タイムライン/体重データ
+{% endblock title %}
+
+
+{% block header %}
+<h1>Muscle App</h1>
+    <a href="{% url 'home' %}" class="btn btn-secondary">ホーム画面へ</a>
+    <a href="{% url 'timeline_workout' %}" class="btn btn-secondary">筋トレメニュー</a>
+    <a href="{% url 'timeline_diet' %}" class="btn btn-secondary">食事管理</a>
+    <a href="{% url 'timeline_body' %}" class="btn btn-secondary disabled">体重管理</a>
+<hr>
+
+{% endblock header %}
+{% block content %}
+<div class="space"></div>
+<div class="menu">
+    <p>体重管理</p>
+</div>
+{% for item in body_data %}
+<div class="container">
+<div class="info">
+    <p>投稿者:{{ item.author }}</p>
+    <p>日付:{{ item.date }}</p>
+    <p>体重:{{ item.weight }}kg</p>
+    <p>体脂肪率:{{ item.percent_body_fat }}%</p>
+    <p>筋肉量:{{ item.muscle_mass }}kg</p>
+
+</div>
+</div>
+{% endfor %}
+
+
+
+{% endblock content %}

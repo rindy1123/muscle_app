@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css?family=Playfair+Display|Raleway&display=swap');
+
+
+header {
+    text-align: light;
+    background-color: #003366;
+    font-family: 'Raleway', sans-serif;
+    color: #fff;
+}
+
+body {
+    background-color: #333333;
+    color: #fff
+}
+
+.content {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 30px;
+    background-color: #003366;
+    border: 10px ridge #000033;
+    border-radius: 10px;
+}
+
+.confirmation {
+    font-size: 20px;
+}
+
+.badge {
+    margin: 10px auto;
+    padding: 8px auto;
+}
+
+input[type='submit'] {
+    margin: auto 20px;
+}

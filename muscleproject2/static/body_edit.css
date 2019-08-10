@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css?family=Playfair+Display|Raleway&display=swap');
+
+
+header {
+    text-align: light;
+    background-color: #003366;
+    font-family: 'Raleway', sans-serif;
+    color: #fff;
+}
+
+body {
+    background-color: #333333;
+    color: #fff
+}
+
+input[type="number"] {
+  position: relative;
+  padding: 0 10px;
+  width: 0 auto;
+  height: 36px;
+  border: 0;
+  background-color: #fff;
+  box-sizing: border-box;
+  font-size: 14px;
+  color: #999;
+  border-radius: 3px;
+  margin: 3px;
+}
+
+input[type='submit'] {
+    border-radius: 3px;
+    background-color: #999999;
+    color: #fff;
+    border-color: #999999;
+    margin: 8px;
+}
+
+.content {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 30px;
+    background-color: #003366;
+    border: 10px ridge #000033;
+    border-radius: 10px;
+}

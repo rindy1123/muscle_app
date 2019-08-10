@@ -1,0 +1,51 @@
+{% extends 'base_beforelogin.html' %}
+
+{% block customcss %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'signup.css' %}">
+{% endblock customcss %}
+
+{% block title %}
+登録画面
+{% endblock title %}
+
+{% block header %}
+<h1>Muscle App</h1>
+{% endblock header %}
+
+{% block content %}
+
+<div class="content">
+  <form class="form-signin" method="POST" action="">{% csrf_token %}
+  <img class="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+  <h1>ユーザー登録</h1>
+  <p class="info">ユーザー名</p>
+    <label for="inputUsername" class="sr-only">ユーザー名</label>
+    <input type="text" id="inputUsername" class="form-control" name="username" required autofocus>
+  <p class="info">パスワード</p>
+    <label for="inputPassword" class="sr-only">パスワード</label>
+    <input type="password" id="inputPassword" class="form-control" name='password' required>
+  <p class="info">メールアドレス</p>
+    <label for="inputEmail" class="sr-only">メールアドレス</label>
+    <input type="email" id="inputEmail" class="form-control" name='email' required>
+  <p class="info">年齢 ※半角数字のみ</p>
+    <label for="inputAge" class="sr-only">年齢</label>
+    <input type="number" id="inputAge" class="form-control" name='age' required>
+  <p class="info">身長(cm)</p>
+    <label for="inputHeight" class="sr-only">年齢</label>
+    <input type="number" id="inputHeight" class="form-control" name='height' required>
+  <p class="info">運動強度</p>
+    <label class="sr-only">運動強度</label>
+      <p><label class="radio"><input type="radio" class="form-control" name='workoutdegree' value="1.2" required>
+          オフィスワークを主とし、普段運動をほぼ行わない方</label></p>
+      <p><label class="radio"><input type="radio" class="form-control" name='workoutdegree' value="1.375" required>
+          軽い強度の筋トレもしくはスポーツを週に1~3回程度行う方</label></p>
+      <p><label class="radio"><input type="radio" class="form-control" name='workoutdegree' value="1.55" required>
+          中強度の筋トレもしくはスポーツを週に3~5回程度行う方</label></p>
+      <p><label class="radio"><input type="radio" class="form-control" name='workoutdegree' value="1.725" required>
+          高い強度の筋トレもしくはスポーツを週に6~7回程度行う方</label></p>
+        <p><button class="btn btn-lg btn-primary btn-block" type="submit">登録</button></p>
+</form>
+</div>
+<p>&copy; 2017-2019</p>
+{% endblock content %}
