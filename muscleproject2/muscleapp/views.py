@@ -48,6 +48,14 @@ def logoutfunc(request):
     logout(request)
     return redirect('login')
 
+
+# ハリスベネティクト方程式で基礎代謝を算出
+# 運動強度依存定数を掛けることでメンテナンスカロリーを算出
+def calculate_maintenance_calorie(degree, weight, height, age):
+    maintenance_calorie = round(degree * (13.4 * weight + 4.8 * height - 5.68 * age + 88.4), 1)
+    return maintenance_calorie
+
+
 # ホーム画面設定
 @login_required
 def homefunc(request):
@@ -61,8 +69,9 @@ def homefunc(request):
         for data in body_data:
             user = get_user_model()
             user_data = user.objects.get(username=data.author)
-            data.maintenance_calorie = round(user_data.workoutdegree * (13.4 * data.weight + 4.8 * user_data.height -
-                                                                        5.68 * user_data.age + 88.4), 1)
+            data.maintenance_calorie = calculate_maintenance_calorie(user_data.workoutdegree, data.weight,
+                                                                     user_data.height, user_data.age)
+            # 減量期・増量期のカロリーは目安
             data.cutting_calorie = data.maintenance_calorie - 500
             data.increasing_calorie = data.maintenance_calorie + 250
             data.save()
@@ -79,8 +88,8 @@ def homefunc(request):
         for data in body_data:
             user = get_user_model()
             user_data = user.objects.get(username=data.author)
-            data.maintenance_calorie = round(user_data.workoutdegree * (13.4 * data.weight + 4.8 * user_data.height -
-                                                                        5.68 * user_data.age + 88.4), 1)
+            data.maintenance_calorie = calculate_maintenance_calorie(user_data.workoutdegree, data.weight,
+                                                                     user_data.height, user_data.age)
             data.cutting_calorie = data.maintenance_calorie - 500
             data.increasing_calorie = data.maintenance_calorie + 250
             data.save()
@@ -113,17 +122,6 @@ def timeline_dietfunc(request):
 @login_required
 def timeline_bodyfunc(request):
     body = BodyModel.objects.order_by('-date').all()
-    for data in body:
-        user = get_user_model()
-        user_data = user.objects.get(username=data.author)
-        # ハリスベネティクト方程式で基礎代謝を算出
-        # 運動強度依存定数を掛けることでメンテナンスカロリーを算出
-        data.maintenance_calorie = round(user_data.workoutdegree * (13.4 * data.weight + 4.8 * user_data.height -
-                                                                    5.68 * user_data.age + 88.4), 1)
-        # 減量期・増量期のカロリーは目安
-        data.cutting_calorie = data.maintenance_calorie - 500
-        data.increasing_calorie = data.maintenance_calorie + 250
-        data.save()
     paginator = Paginator(body, 5)
     page = request.GET.get('page')
     body_data = paginator.get_page(page)
