@@ -10,13 +10,17 @@
 {% endblock title %}
 
 {% block header %}
+{% if user.is_authenticated %}
 <h1>Muscle App</h1>
-    <a href="{% url 'home' %}" class="btn btn-secondary">ホーム画面へ</a>
-    <a href="{% url 'timeline_workout' %}" class="btn btn-secondary">タイムラインへ</a>
+    <a href="{% url 'home' %}" class="btn btn-secondary btn-sm">ホーム画面へ</a>
+    <a href="{% url 'timeline_workout' %}" class="btn btn-secondary btn-sm">タイムラインへ</a>
+{% else %}
+{% endif %}
 {% endblock header %}
 
 
 {% block content %}
+{% if user.is_authenticated %}
 <div class="content">
     <span class="badge badge-danger">注意</span>
     <span class="confirmation">このデータを削除してもよろしいですか？</span>
@@ -25,4 +29,7 @@
     <a href="{% url 'home' %}" class="btn btn-secondary">いいえ</a>
 </form>
 </div>
+{% else %}
+<a href="{% url 'login' %}">ログイン</a>してください
+{% endif %}
 {% endblock content %}

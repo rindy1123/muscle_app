@@ -11,8 +11,8 @@ from django.core.paginator import Paginator
 # Create your views here.
 
 
-# 会員登録設定
 def signupfunc(request):
+    """会員登録設定"""
     if request.method == 'POST':
         user = get_user_model()  # 独自のユーザーモデルを取得
         requested_name = request.POST['username']
@@ -28,8 +28,8 @@ def signupfunc(request):
         return render(request, 'signup.html')
 
 
-# ログイン設定
 def loginfunc(request):
+    """ログイン設定"""
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -43,22 +43,29 @@ def loginfunc(request):
         return render(request, 'login.html')
 
 
-# ログアウト設定
 def logoutfunc(request):
+    """ログアウト設定"""
     logout(request)
     return redirect('login')
 
 
-# ハリスベネティクト方程式で基礎代謝を算出
-# 運動強度依存定数を掛けることでメンテナンスカロリーを算出
 def calculate_maintenance_calorie(degree, weight, height, age):
+    """
+    ハリスベネティクト方程式で基礎代謝を算出
+
+    運動強度依存定数を掛けることでメンテナンスカロリーを算出
+    """
     maintenance_calorie = round(degree * (13.4 * weight + 4.8 * height - 5.68 * age + 88.4), 1)
     return maintenance_calorie
 
 
-# ホーム画面設定
 @login_required
 def homefunc(request):
+    """
+    ホーム画面設定
+
+    日付を変更した場合(POST)と直接ホーム画面に訪問した場合(GET)
+    """
     # 日付を変更した場合
     if request.method == 'POST':
         changed_date = request.POST['date']
@@ -98,9 +105,9 @@ def homefunc(request):
                    'body_data': body_data})
 
 
-# タイムラインで筋トレデータを表示
 @login_required
 def timeline_workoutfunc(request):
+    """タイムラインで筋トレデータを表示"""
     workout = WorkoutModel.objects.order_by('-date').all()
     paginator = Paginator(workout, 5)
     page = request.GET.get('page')
@@ -108,9 +115,9 @@ def timeline_workoutfunc(request):
     return render(request, 'timeline_workout.html', {'workout_data': workout_data})
 
 
-# タイムラインで食事データを表示
 @login_required
 def timeline_dietfunc(request):
+    """タイムラインで食事データを表示"""
     diet = DietModel.objects.order_by('-date').all()
     paginator = Paginator(diet, 5)
     page = request.GET.get('page')
@@ -118,9 +125,9 @@ def timeline_dietfunc(request):
     return render(request, 'timeline_diet.html', {'diet_data': diet_data})
 
 
-# タイムラインで身体データを表示
 @login_required
 def timeline_bodyfunc(request):
+    """タイムラインで身体データを表示"""
     body = BodyModel.objects.order_by('-date').all()
     paginator = Paginator(body, 5)
     page = request.GET.get('page')
@@ -128,78 +135,78 @@ def timeline_bodyfunc(request):
     return render(request, 'timeline_body.html', {'body_data': body_data})
 
 
-# 筋トレデータ作成
 class CreateWorkout(CreateView):
+    """筋トレデータ作成"""
     template_name = 'workout_create.html'
     model = WorkoutModel
     fields = ('name', 'weight', 'reps', 'set', 'author')
     success_url = reverse_lazy('home')
 
 
-# 食事データ作成
 class CreateDiet(CreateView):
+    """食事データ作成"""
     template_name = 'diet_create.html'
     model = DietModel
     fields = ('calorie', 'name', 'protein', 'carb', 'fat', 'author')
     success_url = reverse_lazy('home')
 
 
-# 身体データ作成
 class CreateBody(CreateView):
+    """身体データ作成"""
     template_name = 'body_create.html'
     model = BodyModel
     fields = ('weight', 'percent_body_fat', 'muscle_mass', 'author')
     success_url = reverse_lazy('home')
 
 
-# 筋トレデータ削除
 class DeleteWorkout(DeleteView):
+    """筋トレデータ削除"""
     template_name = 'delete.html'
     model = WorkoutModel
     success_url = reverse_lazy('home')
 
 
-# 食事データ削除
 class DeleteDiet(DeleteView):
+    """食事データ削除"""
     template_name = 'delete.html'
     model = DietModel
     success_url = reverse_lazy('home')
 
 
-# 身体データ削除
 class DeleteBody(DeleteView):
+    """身体データ削除"""
     template_name = 'delete.html'
     model = BodyModel
     success_url = reverse_lazy('home')
 
 
-# 筋トレデータ編集
 class UpdateWorkout(UpdateView):
+    """筋トレデータ編集"""
     template_name = 'workout_update.html'
     model = WorkoutModel
     fields = ('name', 'weight', 'reps', 'set')
     success_url = reverse_lazy('home')
 
 
-# 食事データ編集
 class UpdateDiet(UpdateView):
+    """食事データ編集"""
     template_name = 'diet_update.html'
     model = DietModel
     fields = ('calorie', 'name', 'protein', 'carb', 'fat')
     success_url = reverse_lazy('home')
 
 
-# 身体データ編集
 class UpdateBody(UpdateView):
+    """身体データ編集"""
     template_name = 'body_update.html'
     model = BodyModel
     fields = ('weight', 'percent_body_fat', 'muscle_mass')
     success_url = reverse_lazy('home')
 
 
-# 日付変更画面を表示
 @login_required
 def home_change_datefunc(request):
+    """日付変更画面を表示"""
     return render(request, 'change_date.html')
 
 
