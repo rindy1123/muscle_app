@@ -3,8 +3,12 @@ You can record what type of exercise you did, what you ate, and your weight.
 ## Table of Contents
 + Description
 + Demo
-+ Requirements
-+ Usage
+  + Sign up
+  + Login and Home and Timeline screen
+  + Edit data
++ Environment
++ Import
++ Run server
 ## Description
 You can get healthier by using this app.  
 
