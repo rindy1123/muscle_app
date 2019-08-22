@@ -18,6 +18,7 @@ You can also see other people's data, and learn what you should do to get health
 ![sign-up mov](https://user-images.githubusercontent.com/39889160/63482572-56ce9200-c4d4-11e9-9d52-49852bac2200.gif)
 
 ### Login and Home and Timeline screen
+![login_home_timeline mp4](https://user-images.githubusercontent.com/39889160/63483249-baf25580-c4d6-11e9-88bc-d38948b77b90.gif)
 
 
 ## Requirements
