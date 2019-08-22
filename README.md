@@ -13,4 +13,6 @@ This app automatically calculate how much calories you should consume to lose we
 
 You can also see other people's data, and learn what you should do to get healthier from these data.
 
+## Demo
+![Sign up]()
 ## Requirements
