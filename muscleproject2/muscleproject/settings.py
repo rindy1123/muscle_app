@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'muscleapp',
     'register',
-    'django_nose',
 ]
 
 MIDDLEWARE = [
