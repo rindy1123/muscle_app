@@ -24,12 +24,12 @@ You can also see other people's data, and learn what you should do to get health
 ![edit_data mov](https://user-images.githubusercontent.com/39889160/63483502-93e85380-c4d7-11e9-8617-8a0fe5c6c277.gif)  
 
 ## Environment
-macOS Mojave ver.10.14.6
-python 3.7.4
-HTML5
-CSS
-SQLite3
-django 2.2.4
+macOS Mojave ver.10.14.6  
+python 3.7.4  
+HTML5  
+CSS  
+SQLite3  
+django 2.2.4  
 
 ## Import
 django
